@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Social Connections Widget
- * Version: 1.1
+ * Version: 1.2
  * Plugin URI: http://scryb.es/
  * Description: A widget designed to easily add icons and links to your social pages on all the major networks.
  * Author: Scrybes WordPress Hosting
@@ -23,6 +23,7 @@ function my_plugin_create_table()
 		twitter tinytext NOT NULL,
                 googleplus tinytext NOT NULL,
                 youtube tinytext NOT NULL,
+		tumblr tinytext NOT NULL,
 		rss tinytext NOT NULL,
 		UNIQUE KEY id (id)
 		);";
@@ -45,6 +46,7 @@ class scWidget extends WP_Widget
 		$twitter = empty($instance['twitter']) ? '' : $instance['twitter'];
                 $googleplus = empty($instance['googleplus']) ? '' : $instance['googleplus'];
                 $youtube = empty($instance['youtube']) ? '' : $instance['youtube'];
+		$tumblr = empty($instance['tumblr']) ? '' : $instance['tumblr'];
 		$rss = empty($instance['rss']) ? '' : $instance['rss'];
 		
 		/* Before widget (defined by themes). */
@@ -67,6 +69,9 @@ if (!($googleplus==''))
 if (!($youtube=='')) 
 { echo '<a target="_blank" href="http://www.youtube.com/'.$youtube.'" id="followYouTube"><img src="'.get_bloginfo('url').'/wp-content/plugins/social-connect-widget/img/youtube.png" class="scwLogos" alt="YouTube" /></a>' ; }
 
+if (!($tumblr=='')) 
+{ echo '<a target="_blank" href="http://'.$tumblr.'.tumblr.com" id="followTumblr"><img src="'.get_bloginfo('url').'/wp-content/plugins/social-connect-widget/img/tumblr.png" class="scwLogos" alt="Tumblr" /></a>' ; }
+
 if (!($rss=='')) 
 { echo '<a target="_blank" href="http://feeds.feedburner.com/'.$rss.'" id="subscribeRSS"><img src="'.get_bloginfo('url').'/wp-content/plugins/social-connect-widget/img/rss.png" class="scwLogos" alt="RSS"/></a>' ; }
 
@@ -82,6 +87,7 @@ if (!($rss==''))
 		$instance['twitter'] = strip_tags(stripslashes($new_instance['twitter']));
                 $instance['googleplus'] = strip_tags(stripslashes($new_instance['googleplus']));
                 $instance['youtube'] = strip_tags(stripslashes($new_instance['youtube']));
+                $instance['tumblr'] = strip_tags(stripslashes($new_instance['tumblr']));
 		$instance['rss'] = strip_tags(stripslashes($new_instance['rss']));		
 		global $wpdb;
 			$wpdb->insert( 'SCW_Stats', array(
@@ -90,6 +96,7 @@ if (!($rss==''))
 			'twitter' => $instance['twitter'],
                         'googleplus' => $instance['googleplus'],
                         'youtube' => $instance['youtube'],
+			'tumblr' => $instance['tumblr'],
 			'rss' => $instance['rss']
 			) 
 		);		
@@ -100,6 +107,7 @@ if (!($rss==''))
 				'twitter' => $instance['twitter'],
                                 'googleplus' => $instance['googleplus'],
                                 'youtube' => $instance['youtube'],
+                                'tumblr' => $instance['tumblr'],
 				'rss' => $instance['rss']
 			),
 			array(
@@ -109,11 +117,12 @@ if (!($rss==''))
 		return $instance;
 	}	
 	function form($instance){
-		$instance = wp_parse_args( (array) $instance, array('facebook'=>'scrybes', 'twitter'=>'scrybes', 'googleplus'=>'http://gplus.to/scryb.es', 'youtube'=>'', 'rss'=>'scrybes') );		
+		$instance = wp_parse_args( (array) $instance, array('facebook'=>'scrybes', 'twitter'=>'scrybes', 'googleplus'=>'http://gplus.to/scryb.es', 'youtube'=>'', 'tumblr'=>'', 'rss'=>'scrybes') );		
 		$facebook = htmlspecialchars($instance['facebook']);
 		$twitter = htmlspecialchars($instance['twitter']);
                 $googleplus = htmlspecialchars($instance['googleplus']);
                 $youtube = htmlspecialchars($instance['youtube']);
+                $tumblr = htmlspecialchars($instance['tumblr']);
 		$rss = htmlspecialchars($instance['rss']);	
 		?>
 			<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'hybrid'); ?></label>
@@ -124,6 +133,7 @@ if (!($rss==''))
 		echo '<p><label for="' . $this->get_field_name('twitter') . '">' . ('Twitter handle:') . ' <input id="' . $this->get_field_id('twitter') . '" name="' . $this->get_field_name('twitter') . '" type="text" value="' . $twitter . '" style="width:100%;"/></label></p>';
 		echo '<p><label for="' . $this->get_field_name('googleplus') . '">' . ('Google+ URL:') . ' <input id="' . $this->get_field_id('googleplus') . '" name="' . $this->get_field_name('googleplus') . '" type="text" value="' . $googleplus . '" style="width:100%;"/></label></p>';
 		echo '<p><label for="' . $this->get_field_name('youtube') . '">' . ('YouTube Channel Name:') . ' <input id="' . $this->get_field_id('youtube') . '" name="' . $this->get_field_name('youtube') . '" type="text" value="' . $youtube . '" style="width:100%;"/></label></p>';
+		echo '<p><label for="' . $this->get_field_name('tumblr') . '">' . ('Tumblr URL Name:') . ' <input id="' . $this->get_field_id('tumblr') . '" name="' . $this->get_field_name('tumblr') . '" type="text" value="' . $tumblr . '" style="width:100%;"/></label></p>';
 		echo '<p><label for="' . $this->get_field_name('rss') . '">' . __('Feedburner name:') . ' <input style="width:100%;" id="' . $this->get_field_id('rss') . '" name="' . $this->get_field_name('rss') . '" type="text" value="' . $rss . '" /></label></p>';
 	}
 }
