@@ -3,7 +3,7 @@ Contributors: Scrybes WordPress Hosting
 Donate link: http://scryb.es/
 Tags: social, twitter, facebook, rss, footer, google plus, you tube, tumblr, linkedin, widget
 Requires at least: 2.0.2
-Tested up to: 3.3.0
+Tested up to: 3.3.1
 Stable tag: 4.3
 
 A simple plug-in that provides a widget to display nice little icons with links to most of the popular social network sites.
