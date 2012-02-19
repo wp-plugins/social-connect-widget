@@ -1,7 +1,7 @@
 === Social Connect Widget ===
 Contributors: Scrybes WordPress Hosting
 Donate link: http://scryb.es/
-Tags: social, twitter, facebook, rss, footer, google plus, you tube, tumblr, linkedin, widget
+Tags: social, twitter, facebook, rss, footer, google plus, you tube, tumblr, linkedin, pinterest, widget
 Requires at least: 2.0.2
 Tested up to: 3.3.1
 Stable tag: 4.3
@@ -10,11 +10,11 @@ A simple plug-in that provides a widget to display nice little icons with links 
 
 == Description ==
 
-This plugin will simplify adding links (nice little icons) to Facebook, Twitter, Google+, YouTube, Tumblr, LinkedIn and RSS feeds from your WordPress powered site.
+This plugin will simplify adding links (nice little icons) to Facebook, Twitter, Google+, YouTube, Tumblr, LinkedIn, Pinterest and RSS feeds from your WordPress powered site.
 
-These days it's essentially a necessity to operate hub pages on the major social networks, both as a way to improve a sites SEO and to communicate with users and customers across a range of mediums. This plugin will help you to display pretty links to your WordPress Blog or Sites Twitter, Facebook, Google+, YouTube, Tumblr, LinkedIn and RSS feed pages.
+These days it's essentially a necessity to operate hub pages on the major social networks, both as a way to improve a sites SEO and to communicate with users and customers across a range of mediums. This plugin will help you to display pretty links to your WordPress Blog or Sites Twitter, Facebook, Google+, YouTube, Tumblr, LinkedIn, Pinterest and RSS feed pages.
 
-Further configuration options definitely coming in future versions and we'd love to hear your thoughts via the contact details below. If you ask nicely, we'll probably make it happen! 
+Further configuration options will continue to be added in future versions and we'd love to hear your thoughts via the contact details below. If you ask nicely, we'll probably make it happen! 
 
 == Installation ==
 
@@ -47,6 +47,10 @@ Please contact us via the <a href="http://scryb.es/contact">Scrybes website</a>,
 2. Set-up options screen screenshot-2.png (v 1.3)
 
 == Changelog ==
+
+= 1.2 =
+* Added support for Pinterest (requested by Anders)
+* Cleaned up code to address compliance issues (thanks Thomas)
 
 = 1.3 =
 * MAJOR UPDATE!

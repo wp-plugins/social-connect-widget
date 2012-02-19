@@ -46,12 +46,16 @@ if ( is_admin() ){
 							<td>http:// <input name="sc_linkedin" type="text" id="sc_linkedin" value="<?php echo get_option('sc_linkedin'); ?>" size="35" /></td>
 						</tr>
 						<tr>
+							<td id="siteTitle">Pinterest Username</td>
+							<td>http://pinterest.com/ <input name="sc_pinterest" type="text" id="sc_pinterest" value="<?php echo get_option('sc_pinterest'); ?>" /></td>
+						</tr>
+						<tr>
 							<td id="siteTitle">RSS</td>
 							<td>http:// <input name="sc_rss" type="text" id="sc_rss" value="<?php echo get_option('sc_rss'); ?>" size="35" /></td>
 						</tr>
 					</table>
 					<input type="hidden" name="action" value="update" />
-					<input type="hidden" name="page_options" value="sc_twitter,sc_facebook,sc_googleplus,sc_youtube,sc_tumblr,sc_linkedin,sc_rss" />
+					<input type="hidden" name="page_options" value="sc_twitter,sc_facebook,sc_googleplus,sc_youtube,sc_tumblr,sc_pinterest,sc_linkedin,sc_rss" />
 					<p><input type="submit" value="<?php _e('Save Changes') ?>" /></p>
 				</form>
 				<h2>Preview</h2>

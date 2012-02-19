@@ -20,6 +20,7 @@ function socialConnect_install() {
         $sc_youtube= '';
         $sc_tumblr= '';
         $sc_linkedin= 'www.linkedin.com/company/scrybes';
+	$sc_pinterest= '';
         $sc_rss= 'feeds.feedburner.com/scrybes';
 
 	// Creates new database fields
@@ -29,6 +30,7 @@ function socialConnect_install() {
 	add_option("sc_youtube", $sc_youtube, '', 'yes');
 	add_option("sc_tumblr", $sc_tumblr, '', 'yes');
 	add_option("sc_linkedin", $sc_linkedin, '', 'yes');
+	add_option("sc_pinterest", $sc_pinterest, '', 'yes');
 	add_option("sc_rss", $sc_rss, '', 'yes');
 }
 
@@ -62,6 +64,7 @@ function socialConnect_remove() {
 	delete_option('sc_youtube');
 	delete_option('sc_tumblr');
 	delete_option('sc_linkedin');
+	delete_option('sc_pinterest');
 	delete_option('sc_rss');
 }
 

@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Social Connect Widget
- * Version: 1.3
+ * Version: 1.4
  * Plugin URI: http://scryb.es/
  * Description: A widget designed to easily add icons with links to your social pages on all the major networks.
  * Author: Scrybes WordPress Hosting
