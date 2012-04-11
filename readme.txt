@@ -14,7 +14,7 @@ This plugin will simplify adding links (nice little icons) to Facebook, Twitter,
 
 These days it's essentially a necessity to operate hub pages on the major social networks, both as a way to improve a sites SEO and to communicate with users and customers across a range of mediums. This plugin will help you to display pretty links to your WordPress Blog or Sites Twitter, Facebook, Google+, YouTube, Tumblr, LinkedIn, Pinterest, Vimeo, Flickr, Email and RSS feed pages.
 
-Further configuration options will continue to be added in future versions and we'd love to hear your thoughts via the contact details below. If you ask nicely, we'll probably make it happen! 
+Further configuration options will continue to be added in future versions and we'd love to hear your thoughts <em>via</em> the contact details below. If you ask nicely, we'll probably make it happen! 
 
 == Installation ==
 
