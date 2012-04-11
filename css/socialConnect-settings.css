@@ -1,16 +1,16 @@
 #sc-body h1,h2 {color:#758b8d; font-family: 'Goudy Bookletter 1911',Arial,Serif;}
 #sc-body h1 {font-size: 36px;}
 #sc-body h2{font-size:24px; letter-spacing: -1px; font-weight: normal;}
-#sc-body {padding:0 0 0 25px; width:960px;}
+#sc-body {padding:0 0 0 25px;}
 #sc-body td{vertical-align:middle;}
-#sc-body td#siteTitle{font-weight:bold;}
+#sc-body td.siteTitle{font-weight:bold;}
 #sc-body a{text-decoration:none;}
+#sc-body p {line-height: 16px; font-family: 'Droid Sans',Arial,sans-serif; font-size: 14px; color: #757575;}
 
 #sc-main {width:600px; float:left;}
 #sc-main .icon32 {float: left; height: 34px; margin: 15px 8px 0 0; width: 36px;}
-#sc-main p {line-height: 16px; font-family: 'Droid Sans',Arial,sans-serif; font-size: 14px; color: #757575;}
 
-#sc-sideBanner-container {float:right; -moz-border-radius: 15px; border-radius: 15px; border:1px solid; margin-top:25px; padding:5px;}
+#sc-sideBanner-container {float:left; -moz-border-radius: 15px; border-radius: 15px; border:1px solid; margin-top:25px; margin-left: 50px; padding:5px;}
 #sc-sideBanner-container td{vertical-align:text-top;}
 #sc-sideBanner-image {-moz-border-radius: 12px 12px 0 0; border-radius: 12px 12px 0 0; width:240px; height:272px; background:url(../img/sideBanner/main.png); background-repeat:no-repeat;}
 #sc-sideBanner-divider {height:24px; width:240px; background:url(../img/sideBanner/bg-shadow.png);}

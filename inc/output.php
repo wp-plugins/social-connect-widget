@@ -1,43 +1,64 @@
 <?php
 //Process the plugin options and return html code to display icons and links
 function socialConnect_outputFunction() {
-	$sc_twitter = get_option('sc_twitter');
-	$sc_facebook = get_option('sc_facebook');
-	$sc_googleplus = get_option('sc_googleplus');
-	$sc_youtube = get_option('sc_youtube');
-	$sc_tumblr = get_option('sc_tumblr');
-	$sc_linkedin = get_option('sc_linkedin');
-	$sc_pinterest = get_option('sc_pinterest');
-	$sc_rss = get_option('sc_rss');
-	$sc_imgPath = plugins_url().'/social-connect-widget/img/elegant-themes/';
+
+	//Set up the array used to process the options and whatnot
+	$sc_sites = array(	array("Twitter", "twitter","http://twitter.com/",""),
+						array("Facebook", "facebook", "http://www.facebook.com/",""),
+						array("Google+", "googleplus", "http://", ""),
+						array("You Tube", "youtube", "http://www.youtube.com/", ""),
+						array("Tumblr", "tumblr", "http://", ".tumblr.com"),
+						array("Linked In", "linkedin", "http://", ""),
+						array("Pinterest", "pinterest", "http://pinterest.com/", ""),
+						array("Vimeo", "vimeo", "http://vimeo.com/", ""),
+						array("Flickr", "flickr", "http://flickr.com/", ""),
+						array("Email", "email", "mailto:", ""),
+						array("RSS", "rss", "http://", "")
+					);
+	$sc_count = 11;
+	reset($sc_sites);
+
+	// Grab the option values from WP database
+	for ($i = 0; $i < $sc_count; $i++) {
+		${'sc_'.$sc_sites[$i][1]} = get_option('sc_'.$sc_sites[$i][1]);
+	}
+	$sc_iconSet = "elegant-themes";
+	$sc_imgPath = plugins_url().'/social-connect-widget/img/'.$sc_iconSet.'/';
 	$sc_imgSize = "40";
+	$sc_target = "_blank";
+	$sc_modalHeading = '<h3>'.get_option('sc_modalHeading').'</h3>';
 
-	if ($sc_twitter) {
-		$sc_twitter_output = '<a target="_blank" href="http://twitter.com/'.$sc_twitter.'" id="followTwitter"><img src="'.$sc_imgPath.'twitter.png" class="sc-icons" alt="Twitter" width="'.$sc_imgSize.'" /></a>';
-	}
-	if ($sc_facebook) {
-		$sc_facebook_output = '<a target="_blank" href="http://www.facebook.com/'.$sc_facebook.'" id="followFacebook"><img src="'.$sc_imgPath.'facebook.png" class="sc-icons" alt="Facebook" width="'.$sc_imgSize.'" /></a>';
-	}
-	if ($sc_googleplus) {
-		$sc_googleplus_output = '<a target="_blank" href="http://'.$sc_googleplus.'" id="followGooglePlus"><img src="'.$sc_imgPath.'google.png" class="sc-icons" alt="Google+" width="'.$sc_imgSize.'" /></a>';
-	}
-	if ($sc_youtube) {
-		$sc_youtube_output = '<a target="_blank" href="http://www.youtube.com/'.$sc_youtube.'" id="followYouTube"><img src="'.$sc_imgPath.'youtube.png" class="sc-icons" alt="YouTube" width="'.$sc_imgSize.'" /></a>';
-	}
-	if ($sc_tumblr) {
-		$sc_tumblr_output = '<a target="_blank" href="http://'.$sc_tumblr.'.tumblr.com" id="followTumblr"><img src="'.$sc_imgPath.'tumblr.png" class="sc-icons" alt="Tumblr" width="'.$sc_imgSize.'" /></a>';
+	// Generate the code used to display the icons
+	for ($i = 0; $i < $sc_count; $i++) {
+		if (${'sc_'.$sc_sites[$i][1]}) {
+			${'sc_'.$sc_sites[$i][1].'_link'} = $sc_sites[$i][2].${'sc_'.$sc_sites[$i][1]}.$sc_sites[$i][3];
+			${'sc_'.$sc_sites[$i][1].'_output'} = '<a target="'.$sc_target.'" href="'.${'sc_'.$sc_sites[$i][1].'_link'}.'" title="'.$sc_sites[$i][0].'"><img src="'.$sc_imgPath.$sc_sites[$i][1].'.png" alt="'.${'sc_'.$sc_sites[$i][0]}.'" width="'.$sc_imgSize.'" /></a>';
+			${'sc_'.$sc_sites[$i][1].'_modal'} = '<p>' . ${'sc_'.$sc_sites[$i][1].'_output'} . '<a href = "'.${'sc_'.$sc_sites[$i][1].'_link'}.'" target="'.$sc_target.'" title="'.${'sc_'.$sc_sites[$i][1].'_link'}.'">'.$sc_sites[$i][0].'</a></p>';
+		}
 	}
 
-	if ($sc_linkedin) {
-		$sc_linkedin_output = '<a target="_blank" href="http://'.$sc_linkedin.'" id="followLinkedIn"><img src="'.$sc_imgPath.'linkedin.png" class="sc-icons" alt="LinkedIn" width="'.$sc_imgSize.'" /></a>';
-	}
-	if ($sc_pinterest) {
-		$sc_pinterest_output = '<a target="_blank" href="http://pinterest.com/'.$sc_pinterest.'" id="followPinterest"><img src="'.$sc_imgPath.'pinterest.png" class="sc-icons" alt="Pinterest" width="'.$sc_imgSize.'" /></a>';
-	}
-	if ($sc_rss) {
-		$sc_rss_output = '<a target="_blank" href="http://'.$sc_rss.'" id="subscribeRSS"><img src="'.$sc_imgPath.'rss.png" class="sc-icons" alt="RSS" width="'.$sc_imgSize.'" /></a>';
-	}
-	$socialConnect_output = $sc_twitter_output . $sc_facebook_output . $sc_googleplus_output . $sc_youtube_output . $sc_tumblr_output . $sc_linkedin_output . $sc_pinterest_output . $sc_rss_output;
+	$sc_header = '<div class="sc-container"><div class="sc-icons">';
+	$sc_footer = '</div></div>';
+	
+	// Loop to consolidate the modal code
+	for ($i = 0; $i < $sc_count; $i++) { $sc_modal_sites = $sc_modal_sites . ${'sc_'.$sc_sites[$i][1].'_modal'}; }
+
+	$sc_modal = '	<div id="sc-modalContent">'.
+						$sc_modalHeading .
+						$sc_modal_sites .
+    					'<div id="sc-credit"><p>Social Connect by <a href="http://scryb.es" target="_blank" title="Click for info">Scrybes WordPress Hosting</a></p></div>
+					</div> 
+					<div style="display:none">
+						<img src="http://wordpress.scryb.es/wp-content/plugins/social-connect-widget/img/other/x.png" alt="">
+					</div>';
+	
+	// Loop to consolidate the output code
+	for ($i = 0; $i < $sc_count; $i++) { $sc_icon_output = $sc_icon_output . ${'sc_'.$sc_sites[$i][1].'_output'}; }
+	
+	//Consolidate and put the code in order
+	$socialConnect_output = $sc_header . $sc_icon_output . $sc_footer . $sc_modal;
+	
+	// Finally, spit out the code
 	return $socialConnect_output;
 }
 ?>

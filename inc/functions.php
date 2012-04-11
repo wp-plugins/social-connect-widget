@@ -1,27 +1,46 @@
 <?php
 //Load css sheet for the main WordPress pages
 function addHeaderCode() {
-	echo '<link type="text/css" rel="stylesheet" href="' . get_bloginfo('wpurl') . '/wp-content/plugins/social-connect-widget/css/socialConnect-style.css" />' . "\n";
+	wp_register_style('socialConnect-style', plugins_url().'/social-connect-widget/css/socialConnect-style.php', __FILE__, '' , 'all');
+	wp_register_style('tipTip-style', plugins_url().'/social-connect-widget/css/tipTip.css', __FILE__, '' , 'all');
+
+	wp_register_script('tipTip', plugins_url().'/social-connect-widget/js/jquery.tipTip.js', __FILE__, '' , 'all');
+	wp_register_script('simpleModal', plugins_url().'/social-connect-widget/js/jquery.simplemodal.js', __FILE__, '' , 'all');
+	wp_register_script('socialConnectScripts', plugins_url().'/social-connect-widget/js/socialConnect.scripts.js', __FILE__, '' , 'all');
+        
+	wp_enqueue_style('tipTip-style');
+	wp_enqueue_style('socialConnect-style');
+        
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('tipTip');
+	wp_enqueue_script('simpleModal');
+	wp_enqueue_script('socialConnectScripts');
 }
 
 //Function to do the work of the plugin and return shortcode text
 function socialConnect_shortcodeHandler() {
-  $socialConnect_output = socialConnect_outputFunction();
-  return $socialConnect_output;
+	$socialConnect_output = socialConnect_outputFunction();
+	return $socialConnect_output;
 }
 
 // Runs on plugin install
 function socialConnect_install() {
 	//Populate new option fields with default values
 	global $wpdb;
-        $sc_twitter = 'scrybes';
-        $sc_facebook= 'scrybes';
-        $sc_googleplus= 'gplus.to/scryb.es';
-        $sc_youtube= '';
-        $sc_tumblr= '';
-        $sc_linkedin= 'www.linkedin.com/company/scrybes';
+	$sc_twitter = 'scrybes';
+	$sc_facebook= 'scrybes';
+	$sc_googleplus= 'gplus.to/scryb.es';
+	$sc_youtube= '';
+	$sc_tumblr= '';
+	$sc_linkedin= 'www.linkedin.com/company/scrybes';
 	$sc_pinterest= '';
-        $sc_rss= 'feeds.feedburner.com/scrybes';
+	$sc_vimeo='';
+	$sc_flickr='';
+	$sc_email='';
+    $sc_rss= 'feeds.feedburner.com/scrybes';
+        
+	$sc_css_iconSpace= '20';
+	$sc_modalHeading= 'Connect with Us';
 
 	// Creates new database fields
 	add_option("sc_twitter", $sc_twitter, '', 'yes');
@@ -31,7 +50,13 @@ function socialConnect_install() {
 	add_option("sc_tumblr", $sc_tumblr, '', 'yes');
 	add_option("sc_linkedin", $sc_linkedin, '', 'yes');
 	add_option("sc_pinterest", $sc_pinterest, '', 'yes');
+	add_option("sc_vimeo", $sc_vimeo, '', 'yes');
+	add_option("sc_flickr", $sc_flickr, '', 'yes');
+	add_option("sc_email", $sc_email, '', 'yes');
 	add_option("sc_rss", $sc_rss, '', 'yes');
+	
+	add_option("sc_css_iconSpace", $sc_css_iconSpace, '', 'yes');
+	add_option("sc_modalHeading", $sc_modalHeading, '', 'yes');
 }
 
 // Display admin notice
@@ -65,7 +90,13 @@ function socialConnect_remove() {
 	delete_option('sc_tumblr');
 	delete_option('sc_linkedin');
 	delete_option('sc_pinterest');
+	delete_option('sc_vimeo');
+	delete_option('sc_flickr');
+	delete_option('sc_email');
 	delete_option('sc_rss');
+	
+	delete_option('sc_css_iconSpace');
+	delete_option('sc_modalHeading');
 }
 
 //Register the widget
@@ -75,10 +106,9 @@ function socialConnect_registerWidget() {
 
 // Function to register and then enqueue CSS and fonts on the admin settings page
 function socialConnect_loadCSS() {
-	wp_register_style('socialConnect_mainCSS', plugins_url().'/social-connect-widget/css/socialConnect-style.css', array(), '1.0.0' , 'all');
-	wp_register_style('socialConnect_settingsCSS', plugins_url().'/social-connect-widget/css/socialConnect-settings.css', array(), '1.0.0' , 'all');
-	wp_enqueue_style('socialConnect_mainCSS');
+	wp_register_style('socialConnect_settingsCSS', plugins_url().'/social-connect-widget/css/socialConnect-settings.css', __FILE__, '' , 'all');
 	wp_enqueue_style('socialConnect_settingsCSS');
+	add_action('admin_head', 'addHeaderCode');
 ?>
 <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
