@@ -1,20 +1,16 @@
 <?php
 //Load css sheet for the main WordPress pages
 function addHeaderCode() {
-	wp_register_style('socialConnect-style', plugins_url().'/social-connect-widget/css/socialConnect-style.php', __FILE__, '' , 'all');
-	wp_register_style('tipTip-style', plugins_url().'/social-connect-widget/css/tipTip.css', __FILE__, '' , 'all');
+	wp_enqueue_style('socialConnect-style', plugins_url('/social-connect-widget/css/socialConnect-style.php'));
+	wp_enqueue_style('tipTip-style', plugins_url('/social-connect-widget/css/tipTip.css'));
 
-	wp_register_script('tipTip', plugins_url().'/social-connect-widget/js/jquery.tipTip.js', __FILE__, '' , 'all');
-	wp_register_script('simpleModal', plugins_url().'/social-connect-widget/js/jquery.simplemodal.js', __FILE__, '' , 'all');
-	wp_register_script('socialConnectScripts', plugins_url().'/social-connect-widget/js/socialConnect.scripts.js', __FILE__, '' , 'all');
-        
-	wp_enqueue_style('tipTip-style');
-	wp_enqueue_style('socialConnect-style');
-        
 	wp_enqueue_script('jquery');
-	wp_enqueue_script('tipTip');
-	wp_enqueue_script('simpleModal');
-	wp_enqueue_script('socialConnectScripts');
+	wp_enqueue_script('tipTip', plugins_url('/social-connect-widget/js/jquery.tipTip.js'), __FILE__, '' , 'all');
+	wp_enqueue_script('socialConnectScripts', plugins_url('/social-connect-widget/js/socialConnect.scripts.js'), __FILE__, '' , 'all');
+	if (get_option('sc_displayModal')) {
+		wp_enqueue_style('simpleModal-style', plugins_url('/social-connect-widget/css/simpleModal.php'));
+		wp_enqueue_script('simpleModal', plugins_url('/social-connect-widget/js/jquery.simplemodal.js'), __FILE__, '' , 'all');
+	}
 }
 
 //Function to do the work of the plugin and return shortcode text
@@ -40,7 +36,9 @@ function socialConnect_install() {
     $sc_rss= 'feeds.feedburner.com/scrybes';
         
 	$sc_css_iconSpace= '20';
+	$sc_css_iconAlign= 'left';
 	$sc_modalHeading= 'Connect with Us';
+	$sc_displayModal= '';
 
 	// Creates new database fields
 	add_option("sc_twitter", $sc_twitter, '', 'yes');
@@ -56,7 +54,9 @@ function socialConnect_install() {
 	add_option("sc_rss", $sc_rss, '', 'yes');
 	
 	add_option("sc_css_iconSpace", $sc_css_iconSpace, '', 'yes');
+	add_option("$sc_css_iconAlign", $sc_css_iconAlign, '', 'yes');
 	add_option("sc_modalHeading", $sc_modalHeading, '', 'yes');
+	add_option("sc_displayModal", $sc_displayModal, '', 'yes');	
 }
 
 // Display admin notice
@@ -96,7 +96,9 @@ function socialConnect_remove() {
 	delete_option('sc_rss');
 	
 	delete_option('sc_css_iconSpace');
+	delete_option('sc_css_iconSpace');
 	delete_option('sc_modalHeading');
+	delete_option('sc_displayModal');
 }
 
 //Register the widget
@@ -106,9 +108,8 @@ function socialConnect_registerWidget() {
 
 // Function to register and then enqueue CSS and fonts on the admin settings page
 function socialConnect_loadCSS() {
-	wp_register_style('socialConnect_settingsCSS', plugins_url().'/social-connect-widget/css/socialConnect-settings.css', __FILE__, '' , 'all');
-	wp_enqueue_style('socialConnect_settingsCSS');
-	add_action('admin_head', 'addHeaderCode');
+	wp_enqueue_style('socialConnect_settingsCSS', plugins_url().'/social-connect-widget/css/socialConnect-settings.css', __FILE__, '', 'all');	
+	add_action('admin_init', 'addHeaderCode');
 ?>
 <link href='http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />

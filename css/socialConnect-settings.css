@@ -1,10 +1,10 @@
 #sc-body h1,h2 {color:#758b8d; font-family: 'Goudy Bookletter 1911',Arial,Serif;}
 #sc-body h1 {font-size: 36px;}
-#sc-body h2{font-size:24px; letter-spacing: -1px; font-weight: normal;}
+#sc-body h2 {font-size:24px; letter-spacing: -1px; font-weight: normal;}
 #sc-body {padding:0 0 0 25px;}
-#sc-body td{vertical-align:middle;}
+#sc-body td {vertical-align:middle;}
 #sc-body td.siteTitle{font-weight:bold;}
-#sc-body a{text-decoration:none;}
+#sc-body a {text-decoration:none;}
 #sc-body p {line-height: 16px; font-family: 'Droid Sans',Arial,sans-serif; font-size: 14px; color: #757575;}
 
 #sc-main {width:600px; float:left;}

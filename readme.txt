@@ -48,6 +48,12 @@ Please contact us via the <a href="http://scryb.es/contact">Scrybes website</a>,
 
 == Changelog ==
 
+= 1.5.1 =
+* Addressed issue with vertical spacing when icons flow to a new line
+* Added option to specify the alignment of icons
+* Implemented the ability to control the right-click dialogue box
+* CSS now loads in the head, as it should be
+
 = 1.5 =
 * New badges for Vimeo, Flickr and Email
 * Ability to control spacing between the icons added
@@ -78,6 +84,18 @@ Please contact us via the <a href="http://scryb.es/contact">Scrybes website</a>,
 * Version 1.0 of Social Connection Widget is the first version available as a WordPress plugin
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+More new configuration options to control the formatting of icons have been added
+
+= 1.5 =
+New badges and jQuery tooltips and dialogues added
+
+= 1.4 =
+Plugin now supports Pinterest
+
+= 1.3 =
+Re-write of the code, dedicated options page and new icon set introduced
 
 = 1.2 =
 New option to include icon and link to your Tumblr page
