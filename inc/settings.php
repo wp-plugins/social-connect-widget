@@ -69,10 +69,24 @@ if ( is_admin() ){
 					<br />
 					<hr />
 					<br />
-					<table width="400">
+					<table width="600">
 						<tr>
 							<td class="siteTitle">Icon Spacing</td>
 							<td><input name="sc_css_iconSpace" type="text" id="sc_css_iconSpace" value="<?php echo get_option('sc_css_iconSpace'); ?>" size="3" />&nbsp;px</td>
+						</tr>
+						<tr>
+							<td class="siteTitle">Icon Alignment</td>
+							<td>
+								<select name="sc_css_iconAlign">
+									<option value="left" <?php if (get_option('sc_css_iconAlign')=="left") echo 'selected="selected"'; ?> >Left</option>
+									<option value="right" <?php if (get_option('sc_css_iconAlign')=="right") echo 'selected="selected"'; ?> >Right</option>
+									<option value="center" <?php if (get_option('sc_css_iconAlign')=="center") echo 'selected="selected"'; ?> >Middle</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="siteTitle">Display (right-click) Dialogue</td>
+							<td><input name="sc_displayModal" type="checkbox" id="sc_displayModal" value="TRUE" <?php if (get_option('sc_displayModal')==TRUE) echo 'checked="checked" '; ?> />&nbsp;<small>(Note: Includes a link-back to Scrybes in the footer)</small></td>
 						</tr>
 						<tr>
 							<td class="siteTitle">Right Click Heading</td>
@@ -80,7 +94,7 @@ if ( is_admin() ){
 						</tr>
 					</table>
 					<input type="hidden" name="action" value="update" />
-					<input type="hidden" name="page_options" value="sc_twitter,sc_facebook,sc_googleplus,sc_youtube,sc_tumblr,sc_pinterest,sc_linkedin,sc_vimeo,sc_flickr,sc_email,sc_rss,sc_css_iconSpace,sc_modalHeading" />
+					<input type="hidden" name="page_options" value="sc_twitter,sc_facebook,sc_googleplus,sc_youtube,sc_tumblr,sc_pinterest,sc_linkedin,sc_vimeo,sc_flickr,sc_email,sc_rss,sc_css_iconSpace,sc_css_iconAlign,sc_displayModal,sc_modalHeading" />
 					<p><input type="submit" value="<?php _e('Save Changes') ?>" /></p>
 				</form>
 			</div>

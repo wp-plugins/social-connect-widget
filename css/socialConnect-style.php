@@ -2,27 +2,11 @@
 header('Content-type: text/css');
 require_once('../../../../wp-load.php');
 $iconSpace = get_option('sc_css_iconSpace') / 2;
+$iconAlign = get_option('sc_css_iconAlign');
+$sc_imgSize = '40';
 ?>
 
+.sc-container {text-align:<?php echo $iconAlign; ?>;}
+.sc-icons {display: inline-block; margin-top:-<?php echo $iconSpace; ?>px; margin-bottom:-<?php echo $iconSpace; ?>px;}
 .sc-icons img {vertical-align:middle;}
-.sc-icons a {display: inline-block; margin:0 <?php echo $iconSpace; ?>px; height: <?php echo $iconSpace; ?>px;}
-
-/* Simple Modal Settings */
-#sc-modalContent {display:none;}
-
-/* Overlay */
-#simplemodal-overlay {background-color:#000;}
-
-/* Container */
-#simplemodal-container {width:300px; color:#bbb; background-color:#333; border:4px solid #444; padding:12px;}
-#simplemodal-container .simplemodal-data {padding:8px;}
-#simplemodal-container code {background:#141414; border-left:3px solid #65B43D; color:#bbb; display:block; font-size:12px; margin-bottom:12px; padding:4px 6px 6px;}
-#simplemodal-container a {color:#ddd;}
-#simplemodal-container a.modalCloseImg {background:url(../img/other/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
-#simplemodal-container h3 {color:#84b8d9; font-size:large;}
-
-/* Content */
-#sc-modalContent img {vertical-align:middle; margin-right:15px;}
-#sc-modalContent a {text-decoration:none;}
-#sc-modalContent p {margin-top: <?php echo $iconSpace; ?>px; margin-bottom:0px;}
-#sc-credit p {font-size:x-small; text-align:center; margin: 15px 15px 15px 0;}
+.sc-icons a {display: inline-block; margin:<?php echo $iconSpace; ?>px <?php echo $iconSpace; ?>px; height: <?php echo $sc_imgSize; ?>px;}
