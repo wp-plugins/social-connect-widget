@@ -22,7 +22,7 @@ function socialConnect_outputFunction() {
 	for ($i = 0; $i < $sc_count; $i++) {
 		${'sc_'.$sc_sites[$i][1]} = get_option('sc_'.$sc_sites[$i][1]);
 	}
-	$sc_iconSet = "elegant-themes";
+	$sc_iconSet = get_option('sc_iconSet');
 	$sc_imgPath = plugins_url().'/social-connect-widget/img/'.$sc_iconSet.'/';
 	$sc_imgSize = "40";
 	$sc_target = "_blank";
@@ -51,10 +51,7 @@ function socialConnect_outputFunction() {
 		//Declare the other variables
 		$sc_modalHeader = '<div id="sc-modalContent">';	
 		$sc_modalTitle = '<h3>'.get_option('sc_modalHeading').'</h3>';
-		$sc_modalFooter = '<div id="sc-credit"><p>Social Connect by <a href="http://scryb.es" target="_blank" title="Click for info">Scrybes WordPress Hosting</a></p></div>
-						</div> 
-						<div style="display:none">
-							<img src="http://wordpress.scryb.es/wp-content/plugins/social-connect-widget/img/other/x.png" alt="">
+		$sc_modalFooter = '<div id="sc-credit"><p>Social Connect by <a href="http://www.newspress.io" target="_blank" title="Click to visit">NewsPress</a></p></div>
 						</div>';	
 		//Consolidate the modal code into the necessary output
 		$sc_modal_output = $sc_modalHeader . $sc_modalTitle . $sc_modalSites . $sc_modalFooter;

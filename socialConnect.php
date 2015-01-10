@@ -1,14 +1,17 @@
 <?php
 /*
  * Plugin Name: Social Connect Widget
- * Version: 1.5.1
- * Plugin URI: http://scryb.es/
+ * Version: 1.6.0
+ * Plugin URI: http://www.newspress.io/
  * Description: A widget designed to easily add icons with links to your social pages on all the major networks.
- * Author: Scrybes WordPress Hosting
- * Author URI: http://scryb.es/
+ * Author: NewsPress
+ * Author URI: http://www.newspress.io/
  */
 ?>
 <?php
+// Declare the version number
+$sc_version = '1.6.0';
+
 //Add necessary includes
 require_once(dirname(__FILE__) . '/inc/output.php');
 require_once(dirname(__FILE__) . '/inc/functions.php');
@@ -38,5 +41,8 @@ add_action('admin_init', 'socialConnect_adminNotice_ignore');
 add_action('widgets_init', 'socialConnect_registerWidget');
 
 //Register the shortcode
-add_shortcode("dnh32pw75j", "socialConnect_shortcodeHandler");
+add_shortcode("social-connect", "socialConnect_shortcodeHandler");
+
+// Run updates for existing users
+add_action( 'plugins_loaded', 'socialconnect_update' );
 ?>
