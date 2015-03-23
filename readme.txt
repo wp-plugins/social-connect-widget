@@ -4,7 +4,7 @@ Donate link: http://www.newspress.io
 Tags: social, twitter, facebook, rss, footer, google plus, you tube, tumblr, linkedin, pinterest, vimeo, flickr, email, widget
 Requires at least: 2.0.2
 Tested up to: 4.1
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 
 A simple plug-in that enables WordPress sites to display social media icons with configurable links.
 
@@ -44,7 +44,11 @@ Please contact us via the <a href="http://www.newspress.io/about">NewsPress webs
 
 == Changelog ==
 
-= 1.6 =
+= 1.7.0 =
+* More new icon sets
+* Added support for Instagram accounts
+
+= 1.6.0 =
 * New flat icon set Boxxed added &ndash; props to Pauline at <a href="http://www.twelveskip.com/">TwelveSkip</a>
 * New shortcode [social-connect] allows icons can be placed anywhere
 * Fixed right click modal bug which prevented display

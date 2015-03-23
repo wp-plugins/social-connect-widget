@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Social Connect Widget
- * Version: 1.6.0
+ * Version: 1.7.0
  * Plugin URI: http://www.newspress.io/
  * Description: A widget designed to easily add icons with links to your social pages on all the major networks.
  * Author: NewsPress
@@ -10,7 +10,7 @@
 ?>
 <?php
 // Declare the version number
-$sc_version = '1.6.0';
+$sc_version = '1.7.0';
 
 //Add necessary includes
 require_once(dirname(__FILE__) . '/inc/output.php');

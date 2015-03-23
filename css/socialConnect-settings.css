@@ -12,3 +12,5 @@
 
 #sc-sideBanner-container {float: left; border: 1px solid; margin-top:25px; margin-left: 50px; padding:5px; height: 800px; background-color: #4e555d;}
 #sc-newspress-iframe {height: 800px;}
+
+.sc-footer {font-style: italic; font-size: 13px; line-height: 20px;}

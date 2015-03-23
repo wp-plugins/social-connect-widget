@@ -33,6 +33,7 @@ function socialConnect_install() {
 	$sc_pinterest = '';
 	$sc_vimeo ='';
 	$sc_flickr ='';
+	$sc_instagram ='';
 	$sc_email ='';
     $sc_rss = 'feeds.feedburner.com/news/press';
         
@@ -41,6 +42,8 @@ function socialConnect_install() {
 	$sc_modalHeading = 'Connect with Us';
 	$sc_displayModal = 'true';
 	$sc_iconSet = 'boxxed';
+	$sc_css_iconDesaturate = '0';
+	$sc_imgSize = '40';
 
 	// Creates new database fields
 	add_option("sc_version", $sc_version, '', 'yes');
@@ -54,6 +57,7 @@ function socialConnect_install() {
 	add_option("sc_pinterest", $sc_pinterest, '', 'yes');
 	add_option("sc_vimeo", $sc_vimeo, '', 'yes');
 	add_option("sc_flickr", $sc_flickr, '', 'yes');
+	add_option("sc_instagram", $sc_instagram, '', 'yes');
 	add_option("sc_email", $sc_email, '', 'yes');
 	add_option("sc_rss", $sc_rss, '', 'yes');
 	
@@ -61,25 +65,29 @@ function socialConnect_install() {
 	add_option("$sc_css_iconAlign", $sc_css_iconAlign, '', 'yes');
 	add_option("sc_modalHeading", $sc_modalHeading, '', 'yes');
 	add_option("sc_displayModal", $sc_displayModal, '', 'yes');
-	add_option("sc_iconSet", $sc_iconSet, '', 'yes');	
+	add_option("sc_iconSet", $sc_iconSet, '', 'yes');
+	add_option("sc_css_iconDesaturate", $sc_css_iconDesaturate, '', 'yes');
+	add_option("sc_imgSize", $sc_imgSize, '', 'yes');
 }
 
 // Runs on plugin update
 function socialconnect_update() {
 	global $sc_version;
     if (get_option( 'sc_version' ) != $sc_version | !get_option( 'sc_version' )) {      
-        // Add version number and default icon set for existing users
+        // Add new version number and new option defaults for existing users
         update_option("sc_version", $sc_version, '', 'yes');
-        update_option("sc_iconSet", 'elegant-themes', '', 'yes');
+        update_option("sc_css_iconDesaturate", '0', '', 'yes');
+        update_option("sc_css_imgSize", '40', '', 'yes');
     }
 }
 
 // Display admin notice
 function socialConnect_adminNotice() {
-	global $current_user ;
+	global $current_user;
+	global $sc_version;
 	$user_id = $current_user->ID;
 	// Check that the user hasn't already clicked to ignore the message
-	if ( ! get_user_meta($user_id, '1.6.0_notice_ignore') ) {
+	if ( ! get_user_meta($user_id, $sc_version + '_notice_ignore') ) {
 		echo '<div class="updated"><p>';
 		printf(__('Important! Please check you configuration for Social Connect Widget on the <a href="' . $url = admin_url() . 'options-general.php?page=social-connect-settings">settings page.</a> | <a href="%1$s">Hide Notice</a>'), '?notice_ignore=0');
 		echo "</p></div>";
@@ -92,7 +100,7 @@ function socialConnect_adminNotice_ignore() {
 	$user_id = $current_user->ID;
 	// If user clicks to ignore the notice, add that to their user meta
 	if ( isset($_GET['notice_ignore']) && '0' == $_GET['notice_ignore'] ) {
-		add_user_meta($user_id, '1.6.0_notice_ignore', 'true', true);
+		add_user_meta($user_id, $sc_version + '_notice_ignore', 'true', true);
 	}
 }
 
@@ -107,6 +115,7 @@ function socialConnect_remove() {
 	delete_option('sc_pinterest');
 	delete_option('sc_vimeo');
 	delete_option('sc_flickr');
+	delete_option('sc_instagram');
 	delete_option('sc_email');
 	delete_option('sc_rss');
 	
@@ -115,6 +124,8 @@ function socialConnect_remove() {
 	delete_option('sc_modalHeading');
 	delete_option('sc_displayModal');
 	delete_option('sc_iconSet');
+	delete_option('sc_css_iconDesaturate');
+	delete_option('sc_imgSize');
 }
 
 //Register the widget
@@ -122,13 +133,26 @@ function socialConnect_registerWidget() {
 	register_widget('socialConnect_widget');
 }
 
-// Function to register and then enqueue CSS and fonts on the admin settings page
+// Function to register and then enqueue styles, scripts and fonts on the admin settings page
 function socialConnect_loadCSS() {
-	wp_enqueue_style('socialConnect_settingsCSS', plugins_url().'/social-connect-widget/css/socialConnect-settings.css', __FILE__, '', 'all');	
+	wp_enqueue_style('socialConnect_settingsCSS', plugins_url().'/social-connect-widget/css/socialConnect-settings.css', __FILE__, '', 'all');
+	wp_enqueue_style('sinple-slider-css', plugins_url().'/social-connect-widget/css/simple-slider.css', __FILE__, '', 'all');
+	wp_enqueue_script('simpleSlider', plugins_url('/social-connect-widget/js/jquery.simple-slider.js'), __FILE__, '' , 'all');
+	wp_enqueue_script('socialConnect_settingsJS', plugins_url('/social-connect-widget/js/socialConnect.settings-scripts.js'), __FILE__, '' , 'all');
 	add_action('admin_init', 'addHeaderCode');
 ?>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css' />
 <?php
 }
+
+// Generate links back to author site with Google Analytics tracking based on version number
+function socialConnect_npLink($url, $link) {
+	 	global $sc_version;
+	 	if (!$link) {
+	 		$link = 'NewsPress';
+	 	}
+		$sc_npLink = '<a href="http://www.newspress.io/' . $url . '?utm_source=sc-widget&utm_medium=wordpress&utm_content=' . $sc_version . '&utm_campaign=Social%20Connect%20Widget">' . $link . '</a>';
+		return $sc_npLink;
+	 }
 ?>

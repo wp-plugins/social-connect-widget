@@ -12,10 +12,11 @@ function socialConnect_outputFunction() {
 						array("Pinterest", "pinterest", "http://pinterest.com/", ""),
 						array("Vimeo", "vimeo", "http://vimeo.com/", ""),
 						array("Flickr", "flickr", "http://flickr.com/", ""),
+						array("Instagram", "instagram", "https://instagram.com/", ""),
 						array("Email", "email", "mailto:", ""),
 						array("RSS", "rss", "http://", "")
 					);
-	$sc_count = 11;
+	$sc_count = 12;
 	reset($sc_sites);
 
 	// Grab the option values from WP database
@@ -24,7 +25,7 @@ function socialConnect_outputFunction() {
 	}
 	$sc_iconSet = get_option('sc_iconSet');
 	$sc_imgPath = plugins_url().'/social-connect-widget/img/'.$sc_iconSet.'/';
-	$sc_imgSize = "40";
+	$sc_imgSize = get_option('sc_imgSize');
 	$sc_target = "_blank";
 	$displayModal = get_option('sc_displayModal');
 
@@ -32,7 +33,7 @@ function socialConnect_outputFunction() {
 	for ($i = 0; $i < $sc_count; $i++) {
 		if (${'sc_'.$sc_sites[$i][1]}) {
 			${'sc_'.$sc_sites[$i][1].'_link'} = $sc_sites[$i][2].${'sc_'.$sc_sites[$i][1]}.$sc_sites[$i][3];
-			${'sc_'.$sc_sites[$i][1].'_output'} = '<a target="'.$sc_target.'" href="'.${'sc_'.$sc_sites[$i][1].'_link'}.'" title="'.$sc_sites[$i][0].'"><img src="'.$sc_imgPath.$sc_sites[$i][1].'.png" alt="'.${'sc_'.$sc_sites[$i][0]}.'" width="'.$sc_imgSize.'" /></a>';
+			${'sc_'.$sc_sites[$i][1].'_output'} = '<a target="'.$sc_target.'" href="'.${'sc_'.$sc_sites[$i][1].'_link'}.'" title="'.$sc_sites[$i][0].'"><img src="'.$sc_imgPath.$sc_sites[$i][1].'.png" alt="'.${'sc_'.$sc_sites[$i][0]}.'" width="'.$sc_imgSize.'" class="sc-desaturate"/></a>';
 		}
 		$sc_iconSites = $sc_iconSites . ${'sc_'.$sc_sites[$i][1].'_output'};
 	}
@@ -51,7 +52,7 @@ function socialConnect_outputFunction() {
 		//Declare the other variables
 		$sc_modalHeader = '<div id="sc-modalContent">';	
 		$sc_modalTitle = '<h3>'.get_option('sc_modalHeading').'</h3>';
-		$sc_modalFooter = '<div id="sc-credit"><p>Social Connect by <a href="http://www.newspress.io" target="_blank" title="Click to visit">NewsPress</a></p></div>
+		$sc_modalFooter = '<div id="sc-credit"><p>Social Connect by ' . socialConnect_npLink() . '</p></div>
 						</div>';	
 		//Consolidate the modal code into the necessary output
 		$sc_modal_output = $sc_modalHeader . $sc_modalTitle . $sc_modalSites . $sc_modalFooter;
