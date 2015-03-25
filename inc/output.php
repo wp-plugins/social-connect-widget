@@ -52,7 +52,7 @@ function socialConnect_outputFunction() {
 		//Declare the other variables
 		$sc_modalHeader = '<div id="sc-modalContent">';	
 		$sc_modalTitle = '<h3>'.get_option('sc_modalHeading').'</h3>';
-		$sc_modalFooter = '<div id="sc-credit"><p>Social Connect by ' . socialConnect_npLink() . '</p></div>
+		$sc_modalFooter = '<div id="sc-credit"><p>Social Connect by ' . socialConnect_npLink('', 'NewsPress') . '</p></div>
 						</div>';	
 		//Consolidate the modal code into the necessary output
 		$sc_modal_output = $sc_modalHeader . $sc_modalTitle . $sc_modalSites . $sc_modalFooter;
